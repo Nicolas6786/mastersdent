@@ -25,7 +25,8 @@ Route::group([
 	Route::post('logout','AuthController@logout');
 	Route::post('refresh','AuthController@refersh');
 	Route::post('me','AuthController@me');
-	Route::post('client','TblClienteController@user_client');
+	Route::post('usertipo','TblClienteController@user_client');
+	Route::post('traerclient','TblClienteController@traer_client');
 	Route::post('reserv','TblReservaController@show_edit');
 	Route::resource('cliente','TblClienteController');
 	Route::resource('doctor','TblDoctorController');

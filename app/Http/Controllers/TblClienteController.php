@@ -129,10 +129,19 @@ class TblClienteController extends Controller
     public function user_client()
     {
         $credentials=request(['email']);
-        $tbl_cliente=User::select("*")->where('email',$credentials)->get();
+        $user=User::select("*")->where('email',$credentials)->get();
         return response()->json([
             "status"=>true,
-            "object"=>$tbl_cliente
+            "object"=>$user[0]
+        ]);
+    }
+    public function traer_client()
+    {
+        $credentials=request(['id']);
+        $tbl_cliente=tbl_cliente::select("*")->where('user_id',$credentials)->get();
+        return response()->json([
+            "status"=>true,
+            "object"=>$tbl_cliente[0]
         ]);
     }
 }
