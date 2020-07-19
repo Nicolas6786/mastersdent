@@ -126,7 +126,7 @@ class TblReservaController extends Controller
         $credentials=request(['id']);
         $tbl_reserva=tbl_reserva::find($credentials);
         $tbl_servicio=tbl_servicio::all();
-        $data = array("reserva"=>$tbl_reserva,"servicio"=>$tbl_servicio);
+        $data = array("reserva"=>$tbl_reserva[0],"servicio"=>$tbl_servicio);
         return response()->json([
             "status"=>true,
             "object"=>$data,
