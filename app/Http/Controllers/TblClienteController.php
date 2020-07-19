@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\tbl_cliente;
 use App\User;
 use Illuminate\Http\Request;
+use Hash;
 
 class TblClienteController extends Controller
 {
@@ -41,7 +42,7 @@ class TblClienteController extends Controller
     public function store(Request $request)
     {
         $email=$request->input('email');
-        $password=$request->input('password');
+        $password=Hash::make($request->input('password'));
         //guardar datos
         $user=new User;
         $user->email=$email;
