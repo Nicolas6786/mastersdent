@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\tbl_doctor;
 use App\User;
 use Illuminate\Http\Request;
+use Hash;
 
 class TblDoctorController extends Controller
 {
@@ -40,27 +41,27 @@ class TblDoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //$email=$request->input('email');
-        //$password=$request->input('password');
-        //$user=new User;
-        //$user->email=$email;
-        //$user->password=$password;
-        //$user->tipo=true;
-        //$user->save();
-        //$user_id=$user->id;
-        //$nombres=$request->input('nombres_doctor');
-        //$apellidos=$request->input('apellidos_doctor');
-        //$telefono=$request->input('telefono_doctor');
-        //$dni=$request->input('dni');
-        //$doctor=new tbl_doctor;
-        //$doctor->nombres_doctor=$nombres;
-        //$doctor->apellidos_doctor=$apellidos;
-        //$doctor->telefono_doctor=$telefono;
-        //$doctor->dni_doctor=$dni;
-        //$doctor->user_id=$user_id;
-        //$doctor->estado=true;
-        //$doctor->save();
-        //return redirect()->route('doctor.index');
+        $email=$request->input('email');
+        $password=Hash::make($request->input('password'));
+        $user=new User;
+        $user->email=$email;
+        $user->password=$password;
+        $user->tipo=true;
+        $user->save();
+        $user_id=$user->id;
+        $nombres=$request->input('nombres_doctor');
+        $apellidos=$request->input('apellidos_doctor');
+        $telefono=$request->input('telefono_doctor');
+        $dni=$request->input('dni');
+        $doctor=new tbl_doctor;
+        $doctor->nombres_doctor=$nombres;
+        $doctor->apellidos_doctor=$apellidos;
+        $doctor->telefono_doctor=$telefono;
+        $doctor->dni_doctor=$dni;
+        $doctor->user_id=$user_id;
+        $doctor->estado=true;
+        $doctor->save();
+        return redirect()->route('doctor.index');
     }
 
     /**
@@ -112,5 +113,14 @@ class TblDoctorController extends Controller
     public function destroy(tbl_doctor $tbl_doctor)
     {
         //
+    }
+    public function traer_doctor()
+    {
+        $credentials=request(['id']);
+        $tbl_doctor=tbl_doctor::select("*")->where('user_id',$credentials)->get();
+        return response()->json([
+            "status"=>true,
+            "object"=>$tbl_doctor[0]
+        ]);
     }
 }

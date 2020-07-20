@@ -21,6 +21,7 @@ class CreateTblHistorialsTable extends Migration
             $table->string('apellidos_paciente',250);
             $table->date('fecha_nac');
             $table->string('observacion',500)->nullable();
+            $table->string('direccion',500)->nullable();
             $table->string('antecedentes',500)->nullable();
             $table->string('alergias',500)->nullable();
             $table->string('ocupacion',250)->nullable();

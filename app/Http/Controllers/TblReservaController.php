@@ -51,7 +51,7 @@ class TblReservaController extends Controller
         $tbl_reserva->hora=$hora;
         $tbl_reserva->monto=$monto;
         $tbl_reserva->estado=true;
-        $tbl_reserva->estado_pago=true;
+        $tbl_reserva->estado_pago=false;
         $tbl_reserva->cliente_id=$cliente;
         $tbl_reserva->servicio_id=$servicio;
         $tbl_reserva->save();
