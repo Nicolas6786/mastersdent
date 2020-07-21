@@ -31,6 +31,8 @@ Route::group([
 	Route::post('reserv','TblReservaController@show_edit');
 	Route::post('reservacliente','TblReservaController@index_cliente');
 	Route::post('existencia','TblReservaController@existencia');
+	Route::post('historial_fecha','TblHistorialController@index_fecha');
+	Route::post('historial_nombre','TblHistorialController@index_nombres');
 	Route::resource('cliente','TblClienteController');
 	Route::resource('doctor','TblDoctorController');
 	Route::resource('servicio','TblServicioController');

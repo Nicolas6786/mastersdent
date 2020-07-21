@@ -21,6 +21,30 @@ class TblHistorialController extends Controller
         ]);
     }
 
+    public function index_fecha()
+    {
+        $fecha1=request(['fecha1']);
+        $fecha2=request(['fecha2']);
+        $data=tbl_historial::select("*")->
+        whereBetween("fecha",[$fecha1,$fecha2])->get();
+        return response()->json([
+            "status"=>true,
+            "objects"=>$data
+        ]);
+    }
+
+    public function index_nombres()
+    {
+        $nombres=request(['nombres']);
+        $apellidos=request(['apellidos']);
+        $data=tbl_historial::select("*")->
+        where("nombres_paciente",$nombres)->
+        where("apellidos_paciente",$apellidos)->get();
+        return response()->json([
+            "status"=>true,
+            "objects"=>$data
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -40,7 +64,7 @@ class TblHistorialController extends Controller
     public function store(Request $request)
     {
         $nombres=$request->input('nombres');
-        $apellidos=$request->input('apellios');
+        $apellidos=$request->input('apellidos');
         $fecha_nac=$request->input('fecha_nac');
         $direccion=$request->input('direccion');
         $observacion=$request->input('observacion');
@@ -54,10 +78,10 @@ class TblHistorialController extends Controller
         $adelanto=$request->input('adelanto');
         $fecha=$request->input('fecha');
         $doctor=$request->input('doctor_id');
-        $tbl_historial=new tbl_reserva;
+        $tbl_historial=new tbl_historial;
         $tbl_historial->fecha=$fecha;
         $tbl_historial->nombres_paciente=$nombres;
-        $tbl_historial->apellidos_paciente=$apellios;
+        $tbl_historial->apellidos_paciente=$apellidos;
         $tbl_historial->fecha_nac=$fecha_nac;
         $tbl_historial->observacion=$observacion;
         $tbl_historial->antecedentes=$antecedente;
@@ -69,7 +93,7 @@ class TblHistorialController extends Controller
         $tbl_historial->examen_auxiliar=$auxiliar;
         $tbl_historial->presupuesto=$presupuesto;
         $tbl_historial->adelanto=$adelanto;
-        $tbl_historial->doctor_id=$doctor_id;
+        $tbl_historial->doctor_id=$doctor;
         $tbl_historial->save();
         return response()->json([
             "status"=>true,
