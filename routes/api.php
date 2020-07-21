@@ -29,6 +29,8 @@ Route::group([
 	Route::post('traerclient','TblClienteController@traer_client');
 	Route::post('traerdoct','TblDoctorController@traer_doctor');
 	Route::post('reserv','TblReservaController@show_edit');
+	Route::post('reservacliente','TblReservaController@index_cliente');
+	Route::post('existencia','TblReservaController@existencia');
 	Route::resource('cliente','TblClienteController');
 	Route::resource('doctor','TblDoctorController');
 	Route::resource('servicio','TblServicioController');

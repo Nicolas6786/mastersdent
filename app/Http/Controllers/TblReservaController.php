@@ -23,6 +23,16 @@ class TblReservaController extends Controller
         ]);
     }
 
+    public function index_cliente()
+    {
+        $credentials=request(['id']);
+        $data=tbl_reserva::select("*")->where("cliente_id",$credentials)->get();
+        return response()->json([
+            "status"=>true,
+            "objects"=>$data
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -77,6 +87,18 @@ class TblReservaController extends Controller
             "object"=>$data
         ]);
     }
+    public function existencia()
+    {
+        $hora=request(['hora']);
+        $fecha=request(['fecha']);
+        $tbl_reserva=tbl_reserva::select("id")
+        ->where("fecha",$fecha)
+        ->where("hora",$hora)->get();
+        return response()->json([
+            "status"=>true,
+            "object"=>$tbl_reserva
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -102,6 +124,8 @@ class TblReservaController extends Controller
         $tbl_reserva->fecha=$request->input("fecha");
         $tbl_reserva->hora=$request->input("hora");
         $tbl_reserva->monto=$request->input("monto");
+        $tbl_reserva->estado=$request->input("estado");
+        $tbl_reserva->estado_pago=$request->input("estado_pago");
         $tbl_reserva->servicio_id=$request->input("servicio");
         $tbl_reserva->update();
         return response()->json([
