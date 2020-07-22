@@ -15,8 +15,10 @@ class TblReservaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data=tbl_reserva::all();
+    {   
+        $date = date('Y-m-d');;
+        $data=tbl_reserva::select("*")->
+        where("fecha",$date)->get();
         return response()->json([
             "status"=>true,
             "objects"=>$data
@@ -93,7 +95,8 @@ class TblReservaController extends Controller
         $fecha=request(['fecha']);
         $tbl_reserva=tbl_reserva::select("id")
         ->where("fecha",$fecha)
-        ->where("hora",$hora)->get();
+        ->where("hora",$hora)
+        ->where("estado",true)->get();
         return response()->json([
             "status"=>true,
             "object"=>$tbl_reserva

@@ -27,6 +27,7 @@ Route::group([
 	Route::post('me','AuthController@me');
 	Route::post('usertipo','TblClienteController@user_client');
 	Route::post('traerclient','TblClienteController@traer_client');
+	Route::post('show_cliente','TblClienteController@show_cliente');
 	Route::post('traerdoct','TblDoctorController@traer_doctor');
 	Route::post('reserv','TblReservaController@show_edit');
 	Route::post('reservacliente','TblReservaController@index_cliente');

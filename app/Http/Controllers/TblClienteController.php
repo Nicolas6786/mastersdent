@@ -145,4 +145,16 @@ class TblClienteController extends Controller
             "object"=>$tbl_cliente[0]
         ]);
     }
+    public function show_cliente()
+    {
+        $nombres=request(['nombres']);
+        $apellidos=request(['apellidos']);
+        $data=tbl_cliente::select("*")->
+        where("nombres_cliente",$nombres)->
+        where("apellidos_cliente",$apellidos)->get();
+        return response()->json([
+            "status"=>true,
+            "objects"=>$data
+        ]);
+    }
 }
