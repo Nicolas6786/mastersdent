@@ -68,7 +68,7 @@ class TblClienteController extends Controller
         return response()->json([
             "status"=>true,
             "object"=>$cliente
-        ])
+        ]);
     }
 
     /**
