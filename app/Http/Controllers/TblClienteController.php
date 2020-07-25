@@ -67,7 +67,7 @@ class TblClienteController extends Controller
         $cliente->save();
         return response()->json([
             "status"=>true,
-            "object"=>$cliente
+            "objects"=>$cliente
         ]);
     }
 
