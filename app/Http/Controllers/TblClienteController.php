@@ -65,7 +65,10 @@ class TblClienteController extends Controller
         $cliente->user_id=$user_id;
         //crear cliente
         $cliente->save();
-        return redirect()->route('cliente.index');
+        return response()->json([
+            "status"=>true,
+            "object"=>$cliente
+        ])
     }
 
     /**
