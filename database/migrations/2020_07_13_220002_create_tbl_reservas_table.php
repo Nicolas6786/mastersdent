@@ -23,7 +23,7 @@ class CreateTblReservasTable extends Migration
             $table->time('hora');
             $table->boolean('estado');
             $table->decimal('monto',8,2);
-            $table->boolean('estado_pago');
+            $table->boolean('cambio');
             $table->timestamps();
         });
     }

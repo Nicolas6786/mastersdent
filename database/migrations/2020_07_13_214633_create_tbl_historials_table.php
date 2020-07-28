@@ -19,6 +19,7 @@ class CreateTblHistorialsTable extends Migration
             $table->foreign('doctor_id')->references('id')-> on ('tbl_doctors');
             $table->string('nombres_paciente',250);
             $table->string('apellidos_paciente',250);
+            $table->string('dni_paciente',8);
             $table->date('fecha_nac');
             $table->string('observacion',500)->nullable();
             $table->string('direccion',500)->nullable();

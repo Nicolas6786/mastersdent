@@ -16,9 +16,10 @@ class TblReservaController extends Controller
      */
     public function index()
     {   
-        $date = date('Y-m-d');;
+        $date = date('Y-m-d');
+        $date2= date("Y-m-d",strtotime($date."+ 2 days"));
         $data=tbl_reserva::select("*")->
-        where("fecha",$date)->get();
+        whereBetween("fecha",[$date,$date2])->get();
         return response()->json([
             "status"=>true,
             "objects"=>$data
@@ -29,6 +30,15 @@ class TblReservaController extends Controller
     {
         $credentials=request(['id']);
         $data=tbl_reserva::select("*")->where("cliente_id",$credentials)->get();
+        return response()->json([
+            "status"=>true,
+            "objects"=>$data
+        ]);
+    }
+
+    public function index_cambio()
+    {
+        $data=tbl_reserva::select("*")->where("cambio",true)->get();
         return response()->json([
             "status"=>true,
             "objects"=>$data
@@ -63,7 +73,7 @@ class TblReservaController extends Controller
         $tbl_reserva->hora=$hora;
         $tbl_reserva->monto=$monto;
         $tbl_reserva->estado=true;
-        $tbl_reserva->estado_pago=false;
+        $tbl_reserva->cambio=false;
         $tbl_reserva->cliente_id=$cliente;
         $tbl_reserva->servicio_id=$servicio;
         $tbl_reserva->save();
@@ -128,7 +138,7 @@ class TblReservaController extends Controller
         $tbl_reserva->hora=$request->input("hora");
         $tbl_reserva->monto=$request->input("monto");
         $tbl_reserva->estado=$request->input("estado");
-        $tbl_reserva->estado_pago=$request->input("estado_pago");
+        $tbl_reserva->estado_pago=$request->input("cambio");
         $tbl_reserva->servicio_id=$request->input("servicio");
         $tbl_reserva->update();
         return response()->json([

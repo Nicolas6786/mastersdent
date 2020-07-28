@@ -20,6 +20,7 @@ class CreateTblClientesTable extends Migration
             $table->string('nombres_cliente',250);
             $table->string('apellidos_cliente',250);
             $table->string('telefono_cliente',9);
+            $table->string('dni_cliente',8);
             $table->date('fecha_nac');
             $table->timestamps();
         });

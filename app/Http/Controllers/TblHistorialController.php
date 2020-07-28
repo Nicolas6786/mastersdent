@@ -35,11 +35,9 @@ class TblHistorialController extends Controller
 
     public function index_nombres()
     {
-        $nombres=request(['nombres']);
-        $apellidos=request(['apellidos']);
+        $dni=request(['dni']);
         $data=tbl_historial::select("*")->
-        where("nombres_paciente",$nombres)->
-        where("apellidos_paciente",$apellidos)->get();
+        where("dni_paciente",$dni)->get();
         return response()->json([
             "status"=>true,
             "objects"=>$data
@@ -66,6 +64,7 @@ class TblHistorialController extends Controller
         $nombres=$request->input('nombres');
         $apellidos=$request->input('apellidos');
         $fecha_nac=$request->input('fecha_nac');
+        $dni=$request->input('dni');
         $direccion=$request->input('direccion');
         $observacion=$request->input('observacion');
         $antecedente=$request->input('antecedente');
@@ -83,6 +82,7 @@ class TblHistorialController extends Controller
         $tbl_historial->nombres_paciente=$nombres;
         $tbl_historial->apellidos_paciente=$apellidos;
         $tbl_historial->fecha_nac=$fecha_nac;
+        $tbl_historial->dni_paciente=$dni;
         $tbl_historial->observacion=$observacion;
         $tbl_historial->antecedentes=$antecedente;
         $tbl_historial->alergias=$alergia;
@@ -141,6 +141,7 @@ class TblHistorialController extends Controller
         $tbl_historial->nombres_paciente=$request->input("nombres");
         $tbl_historial->apellidos_paciente=$request->input("apellidos");
         $tbl_historial->fecha_nac=$request->input("fecha_nac");
+        $tbl_historial->dni_paciente=$request->input("dni");
         $tbl_historial->observacion=$request->input("observacion");
         $tbl_historial->antecedentes=$request->input("antecedente");
         $tbl_historial->alergias=$request->input("alergia");

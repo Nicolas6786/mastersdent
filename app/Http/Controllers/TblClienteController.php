@@ -56,12 +56,14 @@ class TblClienteController extends Controller
         $apellidos=$request->input('apellidos_cliente');
         $telefono=$request->input('telefono_cliente');
         $fecha_nac=$request->input('fecha_nac');
+        $dni=$request->input('dni');
         $cliente=new tbl_cliente;
         //guardar datos
         $cliente->nombres_cliente=$nombres;
         $cliente->apellidos_cliente=$apellidos;
         $cliente->telefono_cliente=$telefono;
         $cliente->fecha_nac=$fecha_nac;
+        $cliente->dni_cliente=$dni;
         $cliente->user_id=$user_id;
         //crear cliente
         $cliente->save();
@@ -150,11 +152,9 @@ class TblClienteController extends Controller
     }
     public function show_cliente()
     {
-        $nombres=request(['nombres']);
-        $apellidos=request(['apellidos']);
+        $dni=request(['dni']);
         $data=tbl_cliente::select("*")->
-        where("nombres_cliente",$nombres)->
-        where("apellidos_cliente",$apellidos)->get();
+        where("dni_cliente",$dni)->get();
         return response()->json([
             "status"=>true,
             "objects"=>$data
