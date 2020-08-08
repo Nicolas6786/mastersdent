@@ -138,7 +138,7 @@ class TblReservaController extends Controller
         $tbl_reserva->hora=$request->input("hora");
         $tbl_reserva->monto=$request->input("monto");
         $tbl_reserva->estado=$request->input("estado");
-        $tbl_reserva->estado_pago=$request->input("cambio");
+        $tbl_reserva->estado_pago=$request->input("index_cambio");
         $tbl_reserva->servicio_id=$request->input("servicio");
         $tbl_reserva->update();
         return response()->json([

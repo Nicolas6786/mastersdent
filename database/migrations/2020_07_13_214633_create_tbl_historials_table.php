@@ -24,6 +24,7 @@ class CreateTblHistorialsTable extends Migration
             $table->string('observacion',500)->nullable();
             $table->string('direccion',500)->nullable();
             $table->string('antecedentes',500)->nullable();
+            $table->string('tratamiento',500);
             $table->string('alergias',500)->nullable();
             $table->string('ocupacion',250)->nullable();
             $table->boolean('embarazo');
@@ -32,6 +33,7 @@ class CreateTblHistorialsTable extends Migration
             $table->decimal('presupuesto',8,2);
             $table->decimal('adelanto',8,2);
             $table->date('fecha');
+            $table->date('fecha_fin');
             $table->timestamps();
         });
     }

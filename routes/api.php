@@ -35,6 +35,8 @@ Route::group([
 	Route::post('historial_fecha','TblHistorialController@index_fecha');
 	Route::post('historial_nombre','TblHistorialController@index_nombres');
 	Route::get('reserva_cambio','TblReservaController@index_cambio');
+	Route::post('reporte','TblHistorialController@reportes');
+	Route::post('reporte_final','TblHistorialController@reportes');
 	Route::resource('cliente','TblClienteController');
 	Route::resource('doctor','TblDoctorController');
 	Route::resource('servicio','TblServicioController');

@@ -43,6 +43,32 @@ class TblHistorialController extends Controller
             "objects"=>$data
         ]);
     }
+
+    public function reportes()
+    {
+        $fecha1=request(['fecha1']);
+        $fecha2=request(['fecha2']);
+        $tbl_historial=tbl_historial::select("tratamiento",tbl_historial::raw("count(dni_paciente) as total"))->
+         whereBetween("fecha",[$fecha1,$fecha2])->
+        groupBy("tratamiento")->get();
+        return response()->json([
+            "status"=>true,
+            "objects"=>$tbl_historial
+        ]);
+    }
+
+    public function reportes_final()
+    {
+        $fecha1=request(['fecha1']);
+        $fecha2=request(['fecha2']);
+        $tbl_historial=tbl_historial::select("tratamiento",tbl_historial::raw("count(dni_paciente) as total"))->
+         whereBetween("fecha_final",[$fecha1,$fecha2])->
+        groupBy("tratamiento")->get();
+        return response()->json([
+            "status"=>true,
+            "objects"=>$tbl_historial
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -69,6 +95,7 @@ class TblHistorialController extends Controller
         $observacion=$request->input('observacion');
         $antecedente=$request->input('antecedente');
         $alergia=$request->input('alergia');
+        $tratamiento=$request->input('tratamiento');
         $ocupacion=$request->input('ocupacion');
         $embarazo=$request->input('embarazo');
         $diagnostico=$request->input('diagnostico');
@@ -76,14 +103,17 @@ class TblHistorialController extends Controller
         $presupuesto=$request->input('presupuesto');
         $adelanto=$request->input('adelanto');
         $fecha=$request->input('fecha');
+        $fecha_fin=$request->input('fecha_fin');
         $doctor=$request->input('doctor_id');
         $tbl_historial=new tbl_historial;
         $tbl_historial->fecha=$fecha;
+        $tbl_historial->fecha_fin=$fecha_fin;
         $tbl_historial->nombres_paciente=$nombres;
         $tbl_historial->apellidos_paciente=$apellidos;
         $tbl_historial->fecha_nac=$fecha_nac;
         $tbl_historial->dni_paciente=$dni;
         $tbl_historial->observacion=$observacion;
+        $tbl_historial->tratamiento=$tratamiento;
         $tbl_historial->antecedentes=$antecedente;
         $tbl_historial->alergias=$alergia;
         $tbl_historial->ocupacion=$ocupacion;
@@ -138,12 +168,14 @@ class TblHistorialController extends Controller
     {
         $tbl_historial=tbl_historial::find($id);
         $tbl_historial->fecha=$request->input("fecha");
+        $tbl_historial->fecha_fin=$request->input("fecha_fin");
         $tbl_historial->nombres_paciente=$request->input("nombres");
         $tbl_historial->apellidos_paciente=$request->input("apellidos");
         $tbl_historial->fecha_nac=$request->input("fecha_nac");
         $tbl_historial->dni_paciente=$request->input("dni");
         $tbl_historial->observacion=$request->input("observacion");
         $tbl_historial->antecedentes=$request->input("antecedente");
+        $tbl_historial->tratamiento=$request->input("tratamiento");
         $tbl_historial->alergias=$request->input("alergia");
         $tbl_historial->direccion=$request->input("direccion");
         $tbl_historial->ocupacion=$request->input("ocupacion");
